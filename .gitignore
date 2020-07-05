@@ -1,0 +1,6 @@
+dating.db-shm
+dating.db-wal
+dating.db
+bin/
+obj/
+
