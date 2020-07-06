@@ -25,6 +25,8 @@ import { MemberDetailResolver } from './resolvers/member-detail.resolver';
 import { MemberListResolver } from './resolvers/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './resolvers/member-edit.resolver';
+import { AuthGuard } from './guards/auth.guard';
+import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -70,10 +72,12 @@ export class CustomHammerConfig extends HammerGestureConfig {
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
+      AuthGuard,
       MemberDetailResolver,
       MemberListResolver,
       {provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig},
-      MemberEditResolver
+      MemberEditResolver,
+      PreventUnsavedChanges
    ],
    bootstrap: [
       AppComponent
