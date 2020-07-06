@@ -5,12 +5,12 @@ import { AlertifyService } from '../../services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-member-list',
-  templateUrl: './member-list.component.html',
-  styleUrls: ['./member-list.component.css']
+  selector: 'app-member-detail',
+  templateUrl: './member-detail.component.html',
+  styleUrls: ['./member-detail.component.css']
 })
-export class MemberListComponent implements OnInit {
-users: User[];
+export class MemberDetailComponent implements OnInit {
+  user: User;
   constructor(
     private userService: UserService,
     private alertify: AlertifyService,
@@ -19,14 +19,17 @@ users: User[];
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data['users'];
-    })
-  }
-  loadUsers() {
-    this.userService.getUsers().subscribe((users: User[]) => {
-      this.users = users;
-    }, error => {
-      this.alertify.error(error);
+      this.user = data['user'];
     });
   }
+
+  loadUser() {
+    this.userService.getUser(+this.route.snapshot.params['id'])
+      .subscribe((user: User) => {
+        this.user = user;
+      }, error => {
+        this.alertify.error(error);
+      });
+  }
+
 }
