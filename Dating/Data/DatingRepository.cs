@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Dating.Models;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +44,11 @@ namespace Dating.Data
         {
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
             return photo;
+        }
+
+        public async Task<Photo> GetMainPhotoForUser(int id)
+        {
+            return await _context.Photos.Where(u => u.UserId == id).FirstOrDefaultAsync(p => p.IsMain);
         }
     }
 }
