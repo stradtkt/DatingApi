@@ -124,7 +124,7 @@ namespace Dating.Controllers
             
             if(photoFromRepo.PublicId != null) 
             {
-                var deleteParams = new DeleteParams(photoFromRepo.PublicId);
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
                 var result = _cloudinary.Destroy(deleteParams);
                 if(result.Result == "ok")
                 {
