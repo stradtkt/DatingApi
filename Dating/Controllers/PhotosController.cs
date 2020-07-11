@@ -74,7 +74,7 @@ namespace Dating.Controllers
             var photo = _mapper.Map<Photo>(photoForCreationDto);
             if(userFromRepo.Photos.Any(u => u.IsMain))
             {
-                photo.IsMain = true;            
+                photo.IsMain = false;            
             }
             userFromRepo.Photos.Add(photo);
             if(await _repo.SaveAll())
